@@ -22,5 +22,9 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		ofVideoGrabber vidGrabber;
+		ofVideoGrabber vid_grabber;
+		int vid_width = 1280;
+		int vid_height = 720;
+
+		ofColor pixel_color;
 };
