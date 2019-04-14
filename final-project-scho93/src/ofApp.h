@@ -2,6 +2,10 @@
 
 #include "ofMain.h"
 #include "ofxOpenCv.h"
+#include <iostream>
+#include <vector>
+
+using std::vector;
 
 class ofApp : public ofBaseApp{
 
@@ -26,5 +30,10 @@ class ofApp : public ofBaseApp{
 		int vid_width = 1280;
 		int vid_height = 720;
 
-		ofColor pixel_color;
+		vector<ofColor> average_pixel_color = vector<ofColor>(9);
+
+		int getXCoordinate(int n);
+		int getYCoordinate(int n);
+		ofColor getAverageColor(int n);
+		ofColor ComputeAverageColor(int xBegin, int xEnd, int yBegin, int yEnd);
 };

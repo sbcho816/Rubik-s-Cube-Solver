@@ -11,4 +11,7 @@ Time spent: 3.5 hours.
 Time spent: 3 hours.
 
 ####4/13/19
-- Read a little bit on color recognition using openCV.
+- Read about using the openCV library, including color recognition.
+- Integrated webcam.
+- Was able to get pixel color of a Rubik's Cube and neatly print it on the screen.
+Time spent: 5 hours
