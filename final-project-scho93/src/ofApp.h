@@ -31,11 +31,11 @@ class ofApp : public ofBaseApp{
 		int vid_width = 1280;
 		int vid_height = 720;
 
-		// Rubik's Cube RGB values taken from https://www.schemecolor.com/rubik-cube-colors.php.
+		// Rubik's Cube RGB values inspired from https://www.schemecolor.com/rubik-cube-colors.php.
 		const ofColor white = ofColor(255, 255, 255);
 		const ofColor yellow = ofColor(255, 213, 0);
-		const ofColor red = ofColor(185, 0, 0);
-		const ofColor orange = ofColor(255, 89, 0);
+		const ofColor red = ofColor(200, 0, 0);
+		const ofColor orange = ofColor(255, 85, 0);
 		const ofColor green = ofColor(0, 155, 72);
 		const ofColor blue = ofColor(0, 69, 173);
 
@@ -44,10 +44,20 @@ class ofApp : public ofBaseApp{
 		vector<ofColor> average_pixel_color = vector<ofColor>(9);
 		vector<ofColor> estimated_pixel_color = vector<ofColor>(9);
 
+		ofImage white_side;
+		ofImage yellow_side;
+		ofImage red_side;
+		ofImage orange_side;
+		ofImage green_side;
+		ofImage blue_side;
+
+		int s_key_counter = 0;
+		bool executed = false;
+
 		int getXCoordinate(int n);
 		int getYCoordinate(int n);
 		ofColor getAverageColor(int n);
 		ofColor ComputeAverageColor(int xBegin, int xEnd, int yBegin, int yEnd);
 		double ofApp::ColorDifference(const ofColor default_color, const ofColor input_color);
-		void ofApp::EstimatePixelColor(const vector<ofColor> average_pixel_color);
+		ofColor EstimateColor(const ofColor input_color);
 };

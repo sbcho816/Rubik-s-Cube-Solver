@@ -14,8 +14,8 @@ void ofApp::update(){
 	if (vid_grabber.isFrameNew()) {
 		for (int n = 0; n < 9; n++) {
 			average_pixel_color[n] = getAverageColor(n);
+			estimated_pixel_color[n] = EstimateColor(average_pixel_color[n]);
 		}
-		EstimatePixelColor(average_pixel_color);
 	}
 }
 
@@ -26,8 +26,8 @@ void ofApp::draw(){
 	// Draw the webcam video.
 	vid_grabber.draw(0, 0);
 
-	ofColor green(0, 255, 0);
-	ofSetColor(green);
+	ofColor bright_green(0, 255, 0);
+	ofSetColor(bright_green);
 
 	ofFill();
 	for (int n = 0; n < 9; n++) {
@@ -48,13 +48,23 @@ void ofApp::draw(){
 		}
 	}
 
+	ofSetColor(255, 255, 255);
+
+	if (s_key_counter == 1) {
+		if (!executed) {
+			green_side.grabScreen(5, 5, 225, 225);
+			executed = true;
+		}
+		green_side.draw(0, 400);
+	}
+
 	//ofDrawBitmapString("This is a test", 30, 30);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == 's') {
-
+		s_key_counter++;
 	}
 }
 
@@ -188,6 +198,9 @@ ofColor ofApp::ComputeAverageColor(int x_begin, int x_end, int y_begin, int y_en
 	return ofColor(avg_red_value, avg_green_value, avg_blue_value);
 }
 
+/*
+* Color difference algorithm taken from https://www.compuphase.com/cmetric.htm.
+*/
 double ofApp::ColorDifference(const ofColor cube_color, const ofColor input_color) {
 	double r_mean = (cube_color.r + input_color.r) / 2.0;
 	double r = cube_color.r - input_color.r;
@@ -196,21 +209,15 @@ double ofApp::ColorDifference(const ofColor cube_color, const ofColor input_colo
 	return sqrt((2 + r_mean / 256.0) * r * r + 4 * g * g + (2 + (255 - r_mean) / 256.0) * b * b);
 }
 
-void ofApp::EstimatePixelColor(const vector<ofColor> average_pixel_color) {
-	double min_difference;
-	ofColor estimate_color;
-	for (int n = 0; n < 9; n++) {
-		min_difference = ColorDifference(cube_colors[0], average_pixel_color[n]);
-		estimate_color = cube_colors[0];
-		for (ofColor color : cube_colors) {
-			if (ColorDifference(color, average_pixel_color[n]) < min_difference) {
-				min_difference = ColorDifference(color, average_pixel_color[n]);
-				estimate_color = color;
-			}
-		}
-		estimated_pixel_color.push_back(estimate_color);
-	}
-}
+ofColor ofApp::EstimateColor(const ofColor input_color) {
+	double min_difference = ColorDifference(cube_colors[0], input_color);
+	ofColor estimate_color = cube_colors[0];
 
-// Debating whether to use hue or RGB for color difference.
-// https://stackoverflow.com/questions/35113979/calculate-distance-between-colors-in-hsv-space
+	for (ofColor color : cube_colors) {
+		if (ColorDifference(color, input_color) < min_difference) {
+			min_difference = ColorDifference(color, input_color);
+			estimate_color = color;
+		}
+	}
+	return estimate_color;
+}

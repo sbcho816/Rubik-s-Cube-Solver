@@ -1,5 +1,6 @@
-#### 4/9/19
+# Development Log
 
+#### 4/9/19
 - Began exploring various libraries in openFrameworks such as the 3D graphics library and openCV computer vision library.
 - Read about openFrameworks such as how it works and brainstormed on what I wanted to do and worked on the proposal.
 - Time spent: 3.5 hours.
@@ -19,9 +20,15 @@
 - Time spent: 7 hours
 
 #### 4/16/19
-- Began implementing color difference function
+- Began implementing color difference function.
 - Time spent: 1 hour
 
 #### 4/21/19
-- Complete color difference function and estimate pixel color function
+- Complete color difference function and write estimate color function using the color difference function.
 - Time spent: 1 hour
+
+#### 4/22/19
+- The estimation of Rubik's Cube colors work. 
+- Differentiating red and orange is still a little iffy.
+- Implement ability to print the sides of the cube. Need to work on neatly printing them in corresponding locations.
+- Time spent: 3 hours
