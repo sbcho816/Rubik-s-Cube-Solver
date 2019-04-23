@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofSetWindowTitle("Test");
+	ofSetWindowTitle("Rubik's Cube Solver");
 
 	vid_grabber.setup(vid_width, vid_height);
 }
@@ -15,6 +15,7 @@ void ofApp::update(){
 		for (int n = 0; n < 9; n++) {
 			average_pixel_color[n] = getAverageColor(n);
 		}
+		EstimatePixelColor(average_pixel_color);
 	}
 }
 
@@ -22,7 +23,7 @@ void ofApp::update(){
 void ofApp::draw(){
 	ofSetColor(255, 255, 255);
 	
-	// Draw the webcam video
+	// Draw the webcam video.
 	vid_grabber.draw(0, 0);
 
 	ofColor green(0, 255, 0);
@@ -35,9 +36,9 @@ void ofApp::draw(){
 
 	int xCoordinate = 5;
 	int yCoordinate = 5;
-	if (!average_pixel_color.empty()) {
+	if (!estimated_pixel_color.empty()) {
 		for (int n = 0; n < 9; n++) {
-			ofSetColor(average_pixel_color[n].r, average_pixel_color[n].g, average_pixel_color[n].b);
+			ofSetColor(estimated_pixel_color[n].r, estimated_pixel_color[n].g, estimated_pixel_color[n].b);
 			ofDrawRectangle(xCoordinate, yCoordinate, 75, 75);
 			xCoordinate += 75;
 			if (n == 2 || n == 5) {
@@ -52,7 +53,9 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+	if (key == 's') {
 
+	}
 }
 
 //--------------------------------------------------------------
@@ -183,6 +186,30 @@ ofColor ofApp::ComputeAverageColor(int x_begin, int x_end, int y_begin, int y_en
 	avg_green_value = green_count / counter;
 	avg_blue_value = blue_count / counter;
 	return ofColor(avg_red_value, avg_green_value, avg_blue_value);
+}
+
+double ofApp::ColorDifference(const ofColor cube_color, const ofColor input_color) {
+	double r_mean = (cube_color.r + input_color.r) / 2.0;
+	double r = cube_color.r - input_color.r;
+	double g = cube_color.g - input_color.g;
+	double b = cube_color.b - input_color.b;
+	return sqrt((2 + r_mean / 256.0) * r * r + 4 * g * g + (2 + (255 - r_mean) / 256.0) * b * b);
+}
+
+void ofApp::EstimatePixelColor(const vector<ofColor> average_pixel_color) {
+	double min_difference;
+	ofColor estimate_color;
+	for (int n = 0; n < 9; n++) {
+		min_difference = ColorDifference(cube_colors[0], average_pixel_color[n]);
+		estimate_color = cube_colors[0];
+		for (ofColor color : cube_colors) {
+			if (ColorDifference(color, average_pixel_color[n]) < min_difference) {
+				min_difference = ColorDifference(color, average_pixel_color[n]);
+				estimate_color = color;
+			}
+		}
+		estimated_pixel_color.push_back(estimate_color);
+	}
 }
 
 // Debating whether to use hue or RGB for color difference.
