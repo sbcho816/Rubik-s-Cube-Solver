@@ -76,39 +76,57 @@ void ofApp::draw(){
 	ofDrawRectangle(5, 5, 225, 1);
 	ofDrawRectangle(5,229, 225, 1);
 
+	if (reset) {
+		white_side.clear();
+		yellow_side.clear();
+		red_side.clear();
+		orange_side.clear();
+		green_side.clear();
+		blue_side.clear();
+
+		bool white_captured = false;
+		bool yellow_captured = false;
+		bool red_captured = false;
+		bool orange_captured = false;
+		bool green_captured = false;
+		bool blue_captured = false;
+
+		reset = false;
+	}
+
 	ofSetColor(255, 255, 255);
 	// Draw the cube layout of the captured sides.
-	if (s_key_counter == 1 && !green_captured) {
+	if (space_key_count == 1 && !green_captured) {
 		green_side.grabScreen(5, 5, 225, 225);
 		green_captured = true;
-	} 
+	}
 	green_side.draw(120, 450, 100, 100);
 
-	if (s_key_counter >= 2 && !red_captured) {
+	if (space_key_count == 2 && !red_captured) {
 		red_side.grabScreen(5, 5, 225, 225);
 		red_captured = true;
 	}
 	red_side.draw(220, 450, 100, 100);
 
-	if (s_key_counter >= 3 && !blue_captured) {
+	if (space_key_count == 3 && !blue_captured) {
 		blue_side.grabScreen(5, 5, 225, 225);
 		blue_captured = true;
 	}
 	blue_side.draw(320, 450, 100, 100);
 
-	if (s_key_counter >= 4 && !orange_captured) {
+	if (space_key_count == 4 && !orange_captured) {
 		orange_side.grabScreen(5, 5, 225, 225);
 		orange_captured = true;
 	}
 	orange_side.draw(20, 450, 100, 100);
 
-	if (s_key_counter >= 5 && !yellow_captured) {
+	if (space_key_count == 5 && !yellow_captured) {
 		yellow_side.grabScreen(5, 5, 225, 225);
 		yellow_captured = true;
 	}
 	yellow_side.draw(120, 550, 100, 100);
 
-	if (s_key_counter >= 6 && !white_captured) {
+	if (space_key_count == 6 && !white_captured) {
 		white_side.grabScreen(5, 5, 225, 225);
 		white_captured = true;
 	}
@@ -119,8 +137,12 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == 's') {
-		s_key_counter++;
+	if (key == ' ') {
+		space_key_count++;
+	}
+	if (key == 'r') {
+		space_key_count = 0;
+		reset = true;
 	}
 }
 

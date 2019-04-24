@@ -34,4 +34,7 @@
 - Time spent: 3 hours
 
 ### 4/24/19
-- 
+- Able to get the cubes to print neatly when user presses a key.
+- Added additional details to the visual such as a cube grid.
+- Spent a long time trying to debug my reset functionality, but couldn't find the reason why it wasn't working.
+- Time spent:

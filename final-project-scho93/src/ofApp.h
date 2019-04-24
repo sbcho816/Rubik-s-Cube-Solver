@@ -31,7 +31,11 @@ class ofApp : public ofBaseApp{
 		int vid_width = 1280;
 		int vid_height = 720;
 
-		int s_key_counter = 0;
+		int space_key_count = 0;
+		int s_key_count = 0;
+		int r_key_count = 0;
+
+		bool reset = false;
 
 		// Rubik's Cube RGB values inspired from https://www.schemecolor.com/rubik-cube-colors.php.
 		const ofColor white = ofColor(255, 255, 255);
