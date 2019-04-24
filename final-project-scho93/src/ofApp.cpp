@@ -28,12 +28,13 @@ void ofApp::draw(){
 
 	ofColor bright_green(0, 255, 0);
 	ofSetColor(bright_green);
-
 	ofFill();
+	// Draw 9 squares for location of color detection.
 	for (int n = 0; n < 9; n++) {
 		ofDrawRectangle(getXCoordinate(n), getYCoordinate(n), 16, 16);
 	}
 
+	// Draw the detected colors on the top left.
 	int xCoordinate = 5;
 	int yCoordinate = 5;
 	if (!estimated_pixel_color.empty()) {
@@ -48,15 +49,70 @@ void ofApp::draw(){
 		}
 	}
 
-	ofSetColor(255, 255, 255);
-
-	if (s_key_counter == 1) {
-		if (!executed) {
-			green_side.grabScreen(5, 5, 225, 225);
-			executed = true;
+	// DEBUGGING PURPOSES, DELETE THIS.
+	int xxCoordinate = 235;
+	int yyCoordinate = 5;
+	if (!average_pixel_color.empty()) {
+		for (int n = 0; n < 9; n++) {
+			ofSetColor(average_pixel_color[n].r, average_pixel_color[n].g, average_pixel_color[n].b);
+			ofDrawRectangle(xxCoordinate, yyCoordinate, 75, 75);
+			xxCoordinate += 75;
+			if (n == 2 || n == 5) {
+				xxCoordinate = 235;
+				yyCoordinate += 75;
+			}
 		}
-		green_side.draw(0, 400);
 	}
+
+	ofSetColor(ofColor::black);
+	// Draw lines to make 3x3 grid on top left.
+	ofDrawRectangle(79, 5, 2, 225);
+	ofDrawRectangle(154, 5, 2, 225);
+	ofDrawRectangle(5, 79, 225, 2);
+	ofDrawRectangle(5, 154, 225, 2);
+
+	ofDrawRectangle(5, 5, 1, 225);
+	ofDrawRectangle(229, 5, 1, 225);
+	ofDrawRectangle(5, 5, 225, 1);
+	ofDrawRectangle(5,229, 225, 1);
+
+	ofSetColor(255, 255, 255);
+	// Draw the cube layout of the captured sides.
+	if (s_key_counter == 1 && !green_captured) {
+		green_side.grabScreen(5, 5, 225, 225);
+		green_captured = true;
+	} 
+	green_side.draw(120, 450, 100, 100);
+
+	if (s_key_counter >= 2 && !red_captured) {
+		red_side.grabScreen(5, 5, 225, 225);
+		red_captured = true;
+	}
+	red_side.draw(220, 450, 100, 100);
+
+	if (s_key_counter >= 3 && !blue_captured) {
+		blue_side.grabScreen(5, 5, 225, 225);
+		blue_captured = true;
+	}
+	blue_side.draw(320, 450, 100, 100);
+
+	if (s_key_counter >= 4 && !orange_captured) {
+		orange_side.grabScreen(5, 5, 225, 225);
+		orange_captured = true;
+	}
+	orange_side.draw(20, 450, 100, 100);
+
+	if (s_key_counter >= 5 && !yellow_captured) {
+		yellow_side.grabScreen(5, 5, 225, 225);
+		yellow_captured = true;
+	}
+	yellow_side.draw(120, 550, 100, 100);
+
+	if (s_key_counter >= 6 && !white_captured) {
+		white_side.grabScreen(5, 5, 225, 225);
+		white_captured = true;
+	}
+	white_side.draw(120, 350, 100, 100);
 
 	//ofDrawBitmapString("This is a test", 30, 30);
 }

@@ -32,3 +32,6 @@
 - Differentiating red and orange is still a little iffy.
 - Implement ability to print the sides of the cube. Need to work on neatly printing them in corresponding locations.
 - Time spent: 3 hours
+
+### 4/24/19
+- 

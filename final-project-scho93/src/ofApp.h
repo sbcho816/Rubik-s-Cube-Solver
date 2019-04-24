@@ -31,6 +31,8 @@ class ofApp : public ofBaseApp{
 		int vid_width = 1280;
 		int vid_height = 720;
 
+		int s_key_counter = 0;
+
 		// Rubik's Cube RGB values inspired from https://www.schemecolor.com/rubik-cube-colors.php.
 		const ofColor white = ofColor(255, 255, 255);
 		const ofColor yellow = ofColor(255, 213, 0);
@@ -51,8 +53,12 @@ class ofApp : public ofBaseApp{
 		ofImage green_side;
 		ofImage blue_side;
 
-		int s_key_counter = 0;
-		bool executed = false;
+		bool white_captured = false;
+		bool yellow_captured = false;
+		bool red_captured = false;
+		bool orange_captured = false;
+		bool green_captured = false;
+		bool blue_captured = false;
 
 		int getXCoordinate(int n);
 		int getYCoordinate(int n);
