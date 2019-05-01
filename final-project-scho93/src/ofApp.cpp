@@ -1,20 +1,13 @@
 #include "ofApp.h"
-std::string result;
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetWindowTitle("Rubik's Cube Solver");
 
 	vid_grabber.setup(vid_width, vid_height);
 
-	char* facelets = "DRLUUBFBRBLURRLRUBLRDDFDLFUFUFFDBRDUBRUFLLFDDBFLUBLRBD";
-	char* sol = solution(
-		facelets,
-		24,
-		1000,
-		0,
-		"cache"
-	);
-	result = std::string(sol);
+	facelets = "DRLUUBFBRBLURRLRUBLRDDFDLFUFUFFDBRDUBRUFLLFDDBFLUBLRBD";
+	sol = solution(facelets, 24, 1000, 0, "cache");
 }
 
 //--------------------------------------------------------------
@@ -37,7 +30,7 @@ void ofApp::draw(){
 	vid_grabber.draw(0, 0);
 
 	ofSetColor(ofColor::pink);
-	ofDrawBitmapString(result, 640, 50);
+	ofDrawBitmapString(sol, 640, 50);
 
 	ofSetColor(ofColor::green);
 	ofFill();
@@ -46,12 +39,12 @@ void ofApp::draw(){
 		ofDrawRectangle(getXCoordinate(n), getYCoordinate(n), 16, 16);
 	}
 
-	// Draw the detected colors on the top left.
+	// Draw the estimated colors on the top left.
 	int xCoordinate = 5;
 	int yCoordinate = 5;
 	if (!estimated_pixel_color.empty()) {
 		for (int n = 0; n < 9; n++) {
-			ofSetColor(estimated_pixel_color[n].r, estimated_pixel_color[n].g, estimated_pixel_color[n].b);
+			ofSetColor(estimated_pixel_color[n]);
 			ofDrawRectangle(xCoordinate, yCoordinate, 75, 75);
 			xCoordinate += 75;
 			if (n == 2 || n == 5) {
@@ -61,7 +54,8 @@ void ofApp::draw(){
 		}
 	}
 
-	// DEBUGGING PURPOSES: SHOWS ORIGINAL PIXEL COLORS.
+	// DEBUGGING PURPOSES
+	// Draw the original pixel colors next to estimated colors.
 	int xxCoordinate = 235;
 	int yyCoordinate = 5;
 	if (!average_pixel_color.empty()) {
@@ -86,7 +80,7 @@ void ofApp::draw(){
 	ofDrawRectangle(5, 5, 1, 225);
 	ofDrawRectangle(229, 5, 1, 225);
 	ofDrawRectangle(5, 5, 225, 1);
-	ofDrawRectangle(5,229, 225, 1);
+	ofDrawRectangle(5, 229, 225, 1);
 
 	if (reset) {
 		bool white_captured = false;
@@ -283,6 +277,7 @@ ofColor ofApp::ComputeAverageColor(int x_begin, int x_end, int y_begin, int y_en
 
 /*
 * Color difference algorithm taken from https://www.compuphase.com/cmetric.htm.
+* Computes the closeness of two colors using RGB values.
 */
 double ofApp::ColorDifference(const ofColor cube_color, const ofColor input_color) {
 	double r_mean = (cube_color.r + input_color.r) / 2.0;
@@ -293,14 +288,59 @@ double ofApp::ColorDifference(const ofColor cube_color, const ofColor input_colo
 }
 
 ofColor ofApp::EstimateColor(const ofColor input_color) {
-	double min_difference = ColorDifference(cube_colors[0], input_color);
-	ofColor estimate_color = cube_colors[0];
+	double min_difference = ColorDifference(compare_colors[0], input_color);
+	ofColor estimate_color = compare_colors[0];
 
-	for (ofColor color : cube_colors) {
+	for (ofColor color : compare_colors) {
 		if (ColorDifference(color, input_color) < min_difference) {
 			min_difference = ColorDifference(color, input_color);
 			estimate_color = color;
 		}
 	}
-	return estimate_color;
+
+	if (estimate_color == compare_white) {
+		return display_white;
+	} else if (estimate_color == compare_yellow) {
+		return display_yellow;
+	} else if (estimate_color == compare_red) {
+		return display_red;
+	} else if (estimate_color == compare_orange) {
+		return display_orange;
+	} else if (estimate_color == compare_green) {
+		return display_green;
+	} else {
+		return display_blue;
+	}
+}
+
+void ofApp::FillCubeString() {
+	if (space_key_count == 1) {
+		ColorToString(1, front);
+	} else if (space_key_count == 2) {
+		ColorToString(2, right);
+	} else if (space_key_count == 3) {
+		ColorToString(3, back);
+	} else if (space_key_count == 4) {
+		ColorToString(4, left);
+	} else if (space_key_count == 5) {
+		ColorToString(5, down);
+	} else if (space_key_count == 6) {
+		ColorToString(6, up);
+	}
+}
+
+void ofApp::ColorToString(int key_count, string& face) {
+	if (estimated_pixel_color[key_count] == display_white) {
+		face += "U";
+	} else if (estimated_pixel_color[key_count] == display_yellow) {
+		face += "D";
+	} else if (estimated_pixel_color[key_count] == display_red) {
+		face += "R";
+	} else if (estimated_pixel_color[key_count] == display_orange) {
+		face += "L";
+	} else if (estimated_pixel_color[key_count] == display_green) {
+		face += "F";
+	} else if (estimated_pixel_color[key_count] == display_blue) {
+		face += "B";
+	}
 }
