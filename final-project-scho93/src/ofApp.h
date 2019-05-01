@@ -97,5 +97,6 @@ class ofApp : public ofBaseApp{
 		double ofApp::ColorDifference(const ofColor default_color, const ofColor input_color);
 		ofColor EstimateColor(const ofColor input_color);
 		void FillCubeString();
-		void ColorToString(int key_count, string& face);
+		void ColorToString(string& face);
+		void PrintSolution();
 };

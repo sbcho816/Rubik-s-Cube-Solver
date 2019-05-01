@@ -5,9 +5,6 @@ void ofApp::setup(){
 	ofSetWindowTitle("Rubik's Cube Solver");
 
 	vid_grabber.setup(vid_width, vid_height);
-
-	facelets = "DRLUUBFBRBLURRLRUBLRDDFDLFUFUFFDBRDUBRUFLLFDDBFLUBLRBD";
-	sol = solution(facelets, 24, 1000, 0, "cache");
 }
 
 //--------------------------------------------------------------
@@ -28,9 +25,6 @@ void ofApp::draw(){
 	
 	// Draw the webcam video.
 	vid_grabber.draw(0, 0);
-
-	ofSetColor(ofColor::pink);
-	ofDrawBitmapString(sol, 640, 50);
 
 	ofSetColor(ofColor::green);
 	ofFill();
@@ -121,27 +115,33 @@ void ofApp::draw(){
 
 	if (space_key_count == 5 && !yellow_captured) {
 		yellow_side.grabScreen(5, 5, 225, 225);
-		yellow_side.rotate90(2);
 		yellow_captured = true;
 	}
 	yellow_side.draw(120, 550, 100, 100);
 
 	if (space_key_count == 6 && !white_captured) {
 		white_side.grabScreen(5, 5, 225, 225);
-		white_side.rotate90(2);
 		white_captured = true;
 	}
 	white_side.draw(120, 350, 100, 100);
+
+	if (sol != nullptr) {
+		ofDrawBitmapString(sol, 640, 60);
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == ' ') {
 		space_key_count++;
+		FillCubeString();
 	}
 	if (key == 'R' || key == 'r') {
 		space_key_count = 0;
 		reset = true;
+	}
+	if (key == 'S' || key == 's') {
+		PrintSolution();
 	}
 }
 
@@ -315,32 +315,42 @@ ofColor ofApp::EstimateColor(const ofColor input_color) {
 
 void ofApp::FillCubeString() {
 	if (space_key_count == 1) {
-		ColorToString(1, front);
+		ColorToString(front);
 	} else if (space_key_count == 2) {
-		ColorToString(2, right);
+		ColorToString(right);
 	} else if (space_key_count == 3) {
-		ColorToString(3, back);
+		ColorToString(back);
 	} else if (space_key_count == 4) {
-		ColorToString(4, left);
+		ColorToString(left);
 	} else if (space_key_count == 5) {
-		ColorToString(5, down);
+		ColorToString(down);
 	} else if (space_key_count == 6) {
-		ColorToString(6, up);
+		ColorToString(up);
 	}
 }
 
-void ofApp::ColorToString(int key_count, string& face) {
-	if (estimated_pixel_color[key_count] == display_white) {
-		face += "U";
-	} else if (estimated_pixel_color[key_count] == display_yellow) {
-		face += "D";
-	} else if (estimated_pixel_color[key_count] == display_red) {
-		face += "R";
-	} else if (estimated_pixel_color[key_count] == display_orange) {
-		face += "L";
-	} else if (estimated_pixel_color[key_count] == display_green) {
-		face += "F";
-	} else if (estimated_pixel_color[key_count] == display_blue) {
-		face += "B";
+void ofApp::ColorToString(string& face) {
+	for (int n = 0; n < 9; n++) {
+		if (estimated_pixel_color[n] == display_white) {
+			face += "U";
+		} else if (estimated_pixel_color[n] == display_yellow) {
+			face += "D";
+		} else if (estimated_pixel_color[n] == display_red) {
+			face += "R";
+		} else if (estimated_pixel_color[n] == display_orange) {
+			face += "L";
+		} else if (estimated_pixel_color[n] == display_green) {
+			face += "F";
+		} else if (estimated_pixel_color[n] == display_blue) {
+			face += "B";
+		}
+	}
+}
+
+void ofApp::PrintSolution() {
+	if (space_key_count >= 6) {
+		string cube_definition = up + right + front + down + left + back;
+		facelets = &cube_definition[0u];
+		sol = solution(facelets, 24, 1000, 0, "cache");
 	}
 }
