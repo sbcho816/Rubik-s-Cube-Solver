@@ -37,4 +37,18 @@
 - Able to get the cubes to print neatly when user presses a key.
 - Added additional details to the visual such as a cube grid.
 - Spent a long time trying to debug my reset functionality, but couldn't find the reason why it wasn't working.
-- Time spent:
+- Time spent: 3 hours
+
+### 4/30/19
+- Browsed through several C++ Rubik's Cube solving programs, but was unable to find an optimal and easy to use program.
+- A lot of the solving programs were in other programming languages.
+- Many had little to no documentation, so it was difficult to figure out how I was supposed to use the program and input a state of the cube.
+- Many also didn't compile successfully.
+- I will continue to try and find a solving library.
+- Time spent: 3 hours
+
+### 5/1/19
+- Decided to use a widely used, reliable, and optimal solving library that uses Kociemba's algorithm, but the catch is that it is written in C.
+- The challenge will be integrating C code with C++.
+- Took a while, but was able to successfully compile and run the solver.
+- Time spent: 

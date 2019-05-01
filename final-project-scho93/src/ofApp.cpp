@@ -77,13 +77,6 @@ void ofApp::draw(){
 	ofDrawRectangle(5,229, 225, 1);
 
 	if (reset) {
-		white_side.clear();
-		yellow_side.clear();
-		red_side.clear();
-		orange_side.clear();
-		green_side.clear();
-		blue_side.clear();
-
 		bool white_captured = false;
 		bool yellow_captured = false;
 		bool red_captured = false;
@@ -122,12 +115,14 @@ void ofApp::draw(){
 
 	if (space_key_count == 5 && !yellow_captured) {
 		yellow_side.grabScreen(5, 5, 225, 225);
+		yellow_side.rotate90(2);
 		yellow_captured = true;
 	}
 	yellow_side.draw(120, 550, 100, 100);
 
 	if (space_key_count == 6 && !white_captured) {
 		white_side.grabScreen(5, 5, 225, 225);
+		white_side.rotate90(2);
 		white_captured = true;
 	}
 	white_side.draw(120, 350, 100, 100);
@@ -140,7 +135,7 @@ void ofApp::keyPressed(int key){
 	if (key == ' ') {
 		space_key_count++;
 	}
-	if (key == 'r') {
+	if (key == 'R' || key == 'r') {
 		space_key_count = 0;
 		reset = true;
 	}

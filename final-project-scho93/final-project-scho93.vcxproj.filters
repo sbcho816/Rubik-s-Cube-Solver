@@ -34,9 +34,12 @@
     <ClCompile Include="..\..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp">
       <Filter>addons\ofxOpenCv\src</Filter>
     </ClCompile>
-    <ClCompile Include="cube.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="src\kociemba\coordcube.c" />
+    <ClCompile Include="src\kociemba\cubiecube.c" />
+    <ClCompile Include="src\kociemba\facecube.c" />
+    <ClCompile Include="src\kociemba\prunetable_helpers.c" />
+    <ClCompile Include="src\kociemba\search.c" />
+    <ClCompile Include="src\kociemba\solve.c" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1223,6 +1226,15 @@
     <ClInclude Include="..\..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\world.hpp">
       <Filter>addons\ofxOpenCv\libs\opencv\include\opencv2</Filter>
     </ClInclude>
+    <ClInclude Include="src\kociemba\include\color.h" />
+    <ClInclude Include="src\kociemba\include\coordcube.h" />
+    <ClInclude Include="src\kociemba\include\corner.h" />
+    <ClInclude Include="src\kociemba\include\cubiecube.h" />
+    <ClInclude Include="src\kociemba\include\edge.h" />
+    <ClInclude Include="src\kociemba\include\facecube.h" />
+    <ClInclude Include="src\kociemba\include\facelet.h" />
+    <ClInclude Include="src\kociemba\include\prunetable_helpers.h" />
+    <ClInclude Include="src\kociemba\include\search.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
