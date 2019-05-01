@@ -5,6 +5,12 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <stdio.h>
+#include <stdlib.h>
+
+extern "C" {
+#include "kociemba/include/search.h"
+}
 
 using std::vector;
 

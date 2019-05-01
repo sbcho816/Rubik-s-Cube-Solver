@@ -180,12 +180,24 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\kociemba\coordcube.c" />
-    <ClCompile Include="src\kociemba\cubiecube.c" />
-    <ClCompile Include="src\kociemba\facecube.c" />
-    <ClCompile Include="src\kociemba\prunetable_helpers.c" />
-    <ClCompile Include="src\kociemba\search.c" />
-    <ClCompile Include="src\kociemba\solve.c" />
+    <ClCompile Include="src\kociemba\coordcube.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\kociemba\cubiecube.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\kociemba\facecube.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\kociemba\prunetable_helpers.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\kociemba\search.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+    </ClCompile>
+    <ClCompile Include="src\kociemba\solve.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+    </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="..\..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.cpp" />

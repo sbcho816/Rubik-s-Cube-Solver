@@ -48,7 +48,8 @@
 - Time spent: 3 hours
 
 ### 5/1/19
-- Decided to use a widely used, reliable, and optimal solving library that uses Kociemba's algorithm, but the catch is that it is written in C.
+- Decided to use a widely used, reliable, and optimal solving library from GitHub that uses Kociemba's algorithm, but the catch is that it is written in C.
 - The challenge will be integrating C code with C++.
-- Took a while, but was able to successfully compile and run the solver.
+- Was able to successfully compile and run the solving program on the command line, but took me a while to figure out due to not having experience with make files.
+- 
 - Time spent: 

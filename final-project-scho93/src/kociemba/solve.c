@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include "include/search.h"
 
@@ -18,4 +18,4 @@ int main() {
 	puts(sol);
 	free(sol);
 	return 0;
-}
+}*/

@@ -1,10 +1,20 @@
 #include "ofApp.h"
-
+std::string result;
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetWindowTitle("Rubik's Cube Solver");
 
 	vid_grabber.setup(vid_width, vid_height);
+
+	char* facelets = "DRLUUBFBRBLURRLRUBLRDDFDLFUFUFFDBRDUBRUFLLFDDBFLUBLRBD";
+	char* sol = solution(
+		facelets,
+		24,
+		1000,
+		0,
+		"cache"
+	);
+	result = std::string(sol);
 }
 
 //--------------------------------------------------------------
@@ -26,8 +36,10 @@ void ofApp::draw(){
 	// Draw the webcam video.
 	vid_grabber.draw(0, 0);
 
-	ofColor bright_green(0, 255, 0);
-	ofSetColor(bright_green);
+	ofSetColor(ofColor::pink);
+	ofDrawBitmapString(result, 640, 50);
+
+	ofSetColor(ofColor::green);
 	ofFill();
 	// Draw 9 squares for location of color detection.
 	for (int n = 0; n < 9; n++) {
@@ -49,7 +61,7 @@ void ofApp::draw(){
 		}
 	}
 
-	// DEBUGGING PURPOSES, DELETE THIS.
+	// DEBUGGING PURPOSES: SHOWS ORIGINAL PIXEL COLORS.
 	int xxCoordinate = 235;
 	int yyCoordinate = 5;
 	if (!average_pixel_color.empty()) {
@@ -126,8 +138,6 @@ void ofApp::draw(){
 		white_captured = true;
 	}
 	white_side.draw(120, 350, 100, 100);
-
-	//ofDrawBitmapString("This is a test", 30, 30);
 }
 
 //--------------------------------------------------------------
