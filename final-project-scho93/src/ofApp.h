@@ -33,9 +33,11 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		ofVideoGrabber vid_grabber;
-
+		
 		int vid_width = 1280;
 		int vid_height = 720;
+
+		ofTrueTypeFont code_font;
 
 		int space_key_count = 0;
 		int s_key_count = 0;

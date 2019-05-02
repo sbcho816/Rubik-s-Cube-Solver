@@ -5,6 +5,8 @@ void ofApp::setup(){
 	ofSetWindowTitle("Rubik's Cube Solver");
 
 	vid_grabber.setup(vid_width, vid_height);
+
+	code_font.load("CODE", 28);
 }
 
 //--------------------------------------------------------------
@@ -126,7 +128,10 @@ void ofApp::draw(){
 	white_side.draw(120, 350, 100, 100);
 
 	if (sol != nullptr) {
-		ofDrawBitmapString(sol, 640, 60);
+		string str_sol = string(sol);
+		ofSetColor(200, 200, 200);
+		// Prints the solution centered to the screen.
+		code_font.drawString(str_sol, 640 - (code_font.stringWidth(str_sol) / 2), 694);
 	}
 }
 
@@ -350,7 +355,7 @@ void ofApp::ColorToString(string& face) {
 void ofApp::PrintSolution() {
 	if (space_key_count >= 6) {
 		string cube_definition = up + right + front + down + left + back;
-		facelets = &cube_definition[0u];
+		facelets = &cube_definition[0u]; // Converts string to mutable char*.
 		sol = solution(facelets, 24, 1000, 0, "cache");
 	}
 }
