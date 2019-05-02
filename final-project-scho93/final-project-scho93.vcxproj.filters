@@ -40,6 +40,7 @@
     <ClCompile Include="src\kociemba\prunetable_helpers.c" />
     <ClCompile Include="src\kociemba\search.c" />
     <ClCompile Include="src\kociemba\solve.c" />
+    <ClCompile Include="test\test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1235,6 +1236,7 @@
     <ClInclude Include="src\kociemba\include\facelet.h" />
     <ClInclude Include="src\kociemba\include\prunetable_helpers.h" />
     <ClInclude Include="src\kociemba\include\search.h" />
+    <ClInclude Include="test\catch.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -6,6 +6,7 @@
 #include <vector>
 #include <cmath>
 
+// Kociemba solving algorithm taken from https://github.com/muodov/kociemba.
 extern "C" {
 #include "kociemba/include/search.h"
 }

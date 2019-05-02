@@ -207,6 +207,7 @@
     <ClCompile Include="..\..\..\..\addons\ofxOpenCv\src\ofxCvHaarFinder.cpp" />
     <ClCompile Include="..\..\..\..\addons\ofxOpenCv\src\ofxCvImage.cpp" />
     <ClCompile Include="..\..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp" />
+    <ClCompile Include="test\test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\kociemba\include\color.h" />
@@ -559,6 +560,7 @@
     <ClInclude Include="..\..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\viz\widget_accessor.hpp" />
     <ClInclude Include="..\..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\viz.hpp" />
     <ClInclude Include="..\..\..\..\addons\ofxOpenCv\libs\opencv\include\opencv2\world.hpp" />
+    <ClInclude Include="test\catch.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

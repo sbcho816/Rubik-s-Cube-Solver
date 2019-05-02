@@ -78,54 +78,57 @@ void ofApp::draw(){
 	ofDrawRectangle(5, 5, 225, 1);
 	ofDrawRectangle(5, 229, 225, 1);
 
-	if (reset) {
-		bool white_captured = false;
-		bool yellow_captured = false;
-		bool red_captured = false;
-		bool orange_captured = false;
-		bool green_captured = false;
-		bool blue_captured = false;
-
-		reset = false;
-	}
-
 	ofSetColor(255, 255, 255);
-	// Draw the cube layout of the captured sides.
-	if (space_key_count == 1 && !green_captured) {
-		green_side.grabScreen(5, 5, 225, 225);
-		green_captured = true;
-	}
-	green_side.draw(120, 450, 100, 100);
+	if (!reset) {
+		// Draw the cube layout of the captured sides.
+		if (space_key_count == 1 && !green_captured) {
+			green_side.grabScreen(5, 5, 225, 225);
+			green_captured = true;
+		}
+		if (space_key_count >= 1 && green_captured) {
+			green_side.draw(120, 450, 100, 100);
+		}
 
-	if (space_key_count == 2 && !red_captured) {
-		red_side.grabScreen(5, 5, 225, 225);
-		red_captured = true;
-	}
-	red_side.draw(220, 450, 100, 100);
+		if (space_key_count == 2 && !red_captured) {
+			red_side.grabScreen(5, 5, 225, 225);
+			red_captured = true;
+		}
+		if (space_key_count >= 2 && red_captured) {
+			red_side.draw(220, 450, 100, 100);
+		}
 
-	if (space_key_count == 3 && !blue_captured) {
-		blue_side.grabScreen(5, 5, 225, 225);
-		blue_captured = true;
-	}
-	blue_side.draw(320, 450, 100, 100);
+		if (space_key_count == 3 && !blue_captured) {
+			blue_side.grabScreen(5, 5, 225, 225);
+			blue_captured = true;
+		}
+		if (space_key_count >= 3 && blue_captured) {
+			blue_side.draw(320, 450, 100, 100);
+		}
 
-	if (space_key_count == 4 && !orange_captured) {
-		orange_side.grabScreen(5, 5, 225, 225);
-		orange_captured = true;
-	}
-	orange_side.draw(20, 450, 100, 100);
+		if (space_key_count == 4 && !orange_captured) {
+			orange_side.grabScreen(5, 5, 225, 225);
+			orange_captured = true;
+		}
+		if (space_key_count >= 4 && orange_captured) {
+			orange_side.draw(20, 450, 100, 100);
+		}
 
-	if (space_key_count == 5 && !yellow_captured) {
-		yellow_side.grabScreen(5, 5, 225, 225);
-		yellow_captured = true;
-	}
-	yellow_side.draw(120, 550, 100, 100);
+		if (space_key_count == 5 && !yellow_captured) {
+			yellow_side.grabScreen(5, 5, 225, 225);
+			yellow_captured = true;
+		}
+		if (space_key_count >= 5 && yellow_captured) {
+			yellow_side.draw(120, 550, 100, 100);
+		}
 
-	if (space_key_count == 6 && !white_captured) {
-		white_side.grabScreen(5, 5, 225, 225);
-		white_captured = true;
+		if (space_key_count == 6 && !white_captured) {
+			white_side.grabScreen(5, 5, 225, 225);
+			white_captured = true;
+		}
+		if (space_key_count >= 6 && white_captured) {
+			white_side.draw(120, 350, 100, 100);
+		}
 	}
-	white_side.draw(120, 350, 100, 100);
 
 	if (sol != nullptr) {
 		string str_sol = string(sol);
@@ -138,12 +141,29 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	if (key == ' ') {
+		reset = false;
 		space_key_count++;
 		FillCubeString();
 	}
 	if (key == 'R' || key == 'r') {
-		space_key_count = 0;
 		reset = true;
+		space_key_count = 0;
+
+		white_captured = false;
+		yellow_captured = false;
+		red_captured = false;
+		orange_captured = false;
+		green_captured = false;
+		blue_captured = false;
+
+		up.clear();
+		right.clear();
+		front.clear();
+		down.clear();
+		left.clear();
+		back.clear();
+
+		sol = nullptr;
 	}
 	if (key == 'S' || key == 's') {
 		PrintSolution();
