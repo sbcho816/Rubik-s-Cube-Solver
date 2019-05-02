@@ -55,16 +55,16 @@ class ofApp : public ofBaseApp{
 		const ofColor compare_green = ofColor(0, 155, 50);
 		const ofColor compare_blue = ofColor(0, 69, 173);
 
-		const vector<ofColor> compare_colors = { compare_white, compare_yellow, compare_red, 
-			                                     compare_orange, compare_green, compare_blue };
-
-		// Colors displayed on screen.
+		// Cube colors displayed on screen.
 		const ofColor display_white = ofColor(255, 255, 255);
 		const ofColor display_yellow = ofColor(255, 255, 0);
 		const ofColor display_red = ofColor(225, 0, 0);
 		const ofColor display_orange = ofColor(255, 170, 0);
 		const ofColor display_green = ofColor(0, 185, 0);
 		const ofColor display_blue = ofColor(0, 0, 200);
+
+		const vector<ofColor> compare_colors = { compare_white, compare_yellow, compare_red,
+												 compare_orange, compare_green, compare_blue };
 
 		vector<ofColor> average_pixel_color = vector<ofColor>(9);
 		vector<ofColor> estimated_pixel_color = vector<ofColor>(9);
@@ -93,11 +93,13 @@ class ofApp : public ofBaseApp{
 		char* facelets;
 		char* sol;
 
+		bool unsolvable = false;
+
 		int getXCoordinate(int n);
 		int getYCoordinate(int n);
 		ofColor getAverageColor(int n);
 		ofColor ComputeAverageColor(int xBegin, int xEnd, int yBegin, int yEnd);
-		double ofApp::ColorDifference(const ofColor default_color, const ofColor input_color);
+		double ColorDifference(const ofColor default_color, const ofColor input_color);
 		ofColor EstimateColor(const ofColor input_color);
 		void FillCubeString();
 		void ColorToString(string& face);

@@ -6,7 +6,7 @@ void ofApp::setup(){
 
 	vid_grabber.setup(vid_width, vid_height);
 
-	code_font.load("CODE", 28);
+	code_font.load("CODE", 29);
 }
 
 //--------------------------------------------------------------
@@ -85,56 +85,46 @@ void ofApp::draw(){
 			green_side.grabScreen(5, 5, 225, 225);
 			green_captured = true;
 		}
-		if (space_key_count >= 1 && green_captured) {
-			green_side.draw(120, 450, 100, 100);
-		}
+		green_side.draw(120, 450, 100, 100);
 
 		if (space_key_count == 2 && !red_captured) {
 			red_side.grabScreen(5, 5, 225, 225);
 			red_captured = true;
 		}
-		if (space_key_count >= 2 && red_captured) {
-			red_side.draw(220, 450, 100, 100);
-		}
+		red_side.draw(220, 450, 100, 100);
 
 		if (space_key_count == 3 && !blue_captured) {
 			blue_side.grabScreen(5, 5, 225, 225);
 			blue_captured = true;
 		}
-		if (space_key_count >= 3 && blue_captured) {
-			blue_side.draw(320, 450, 100, 100);
-		}
+		blue_side.draw(320, 450, 100, 100);
 
 		if (space_key_count == 4 && !orange_captured) {
 			orange_side.grabScreen(5, 5, 225, 225);
 			orange_captured = true;
 		}
-		if (space_key_count >= 4 && orange_captured) {
-			orange_side.draw(20, 450, 100, 100);
-		}
+		orange_side.draw(20, 450, 100, 100);
 
 		if (space_key_count == 5 && !yellow_captured) {
 			yellow_side.grabScreen(5, 5, 225, 225);
 			yellow_captured = true;
 		}
-		if (space_key_count >= 5 && yellow_captured) {
-			yellow_side.draw(120, 550, 100, 100);
-		}
+		yellow_side.draw(120, 550, 100, 100);
 
 		if (space_key_count == 6 && !white_captured) {
 			white_side.grabScreen(5, 5, 225, 225);
 			white_captured = true;
 		}
-		if (space_key_count >= 6 && white_captured) {
-			white_side.draw(120, 350, 100, 100);
-		}
+		white_side.draw(120, 350, 100, 100);
 	}
 
+	ofSetColor(200, 200, 200);
 	if (sol != nullptr) {
 		string str_sol = string(sol);
-		ofSetColor(200, 200, 200);
 		// Prints the solution centered to the screen.
 		code_font.drawString(str_sol, 640 - (code_font.stringWidth(str_sol) / 2), 694);
+	} else if (unsolvable) {
+		code_font.drawString("Unsolvable cube!", 640 - (code_font.stringWidth("Unsolvable cube!") / 2), 694);
 	}
 }
 
@@ -156,6 +146,13 @@ void ofApp::keyPressed(int key){
 		green_captured = false;
 		blue_captured = false;
 
+		white_side.clear();
+		yellow_side.clear();
+		red_side.clear();
+		orange_side.clear();
+		green_side.clear();
+		blue_side.clear();
+
 		up.clear();
 		right.clear();
 		front.clear();
@@ -164,6 +161,7 @@ void ofApp::keyPressed(int key){
 		back.clear();
 
 		sol = nullptr;
+		unsolvable = false;
 	}
 	if (key == 'S' || key == 's') {
 		PrintSolution();
@@ -377,5 +375,8 @@ void ofApp::PrintSolution() {
 		string cube_definition = up + right + front + down + left + back;
 		facelets = &cube_definition[0u]; // Converts string to mutable char*.
 		sol = solution(facelets, 24, 1000, 0, "cache");
+		if (sol == nullptr) {
+			unsolvable = true;
+		}
 	}
 }
