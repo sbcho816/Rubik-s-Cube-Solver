@@ -7,3 +7,6 @@
 - Add ofxOpenCv addon through project generator.
 
 ### Using the Program
+- Position the cube so that each 3x3 square is over the 9 green squares.
+- Scan in this order: green, red, blue, orange, yellow, white.
+- Press 'space' to scan the cube, 's' to solve the cube, and 'r' to reset.

@@ -58,5 +58,7 @@
 - Was able to input the scramble state from the scanned cube to the solving algorithm. Successfully displays the solution to the screen!
 - Fixed the reset function.
 - Made small tweaks to optimize the program.
-- Implement tests for EstimateColor function.
-- Time spent: 7 hours
+- Completed testing.
+- Initial README file written.
+- Project done at 11:55 PM!
+- Time spent: 13 hours
