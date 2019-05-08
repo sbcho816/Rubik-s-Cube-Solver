@@ -1,12 +1,37 @@
 # Rubik's Cube Solver
+Program that recognizes the colors of the Rubik's Cube through the webcam and outputs the solution. Developed using the OpenCV library. 
 
 ### Running the Program
-- Install openFrameworks, a C++ toolkit containing libraries that are necessary to run the program.
-- Clone the GitHub repository.
-- Run the openFrameworks project generator, which is located in the following directory within the openFrameworks folder: of_v0.10.1_vs2017_release/projectGenerator-vs/projectGenerator.exe.
-- Add ofxOpenCv addon through project generator.
+1. Install [openFrameworks](https://openframeworks.cc/).
+2. Clone this repository.
+3. Run the openFrameworks project generator.
+4. From the project generator, import the cloned repository and add the ofxOpenCv addon.
+5. The program can now be run using an IDE.
 
 ### Using the Program
-- Position the cube so that each 3x3 square is over the 9 green squares.
-- Scan in this order: green, red, blue, orange, yellow, white.
-- Press 'space' to scan the cube, 's' to solve the cube, and 'r' to reset.
+- Position the Rubik's Cube so that each of the 9 green squares lies on each sticker of the cube as shown below.
+![screenshot_1](https://github.com/uiuc-sp19-cs126/final-project-scho93/blob/master/images/screenshot_1.PNG)
+- The program will show two real-time images of the cube face on the top left. The left image shows the estimated colors. The right image shows the actual colors detected by the webcam.
+- Press `space` to scan a side of the cube.
+- In order for the program to correctly save the state of the cube, the cube must be scanned in the following order:
+    1. Scan green center with white center on top.
+	2. Scan red center with white center on top.
+	3. Scan blue center with white center on top.
+	4. Scan orange center with white center on top.
+	5. Scan yellow center with green center on top.
+	6. Scan white center with blue center on top.
+- After each scan, the scanned side will be displayed in the lower left of the screen. The photo below shows the white center being scanned.
+![screenshot_2](https://github.com/uiuc-sp19-cs126/final-project-scho93/blob/master/images/screenshot_2.PNG)
+- Press `s` to output the solution to the Rubik's Cube.
+- The solution to the cube will be outputted in [Singmaster notation](https://proofwiki.org/wiki/Definition:Singmaster_Notation) as shown below.
+![screenshot_3](https://github.com/uiuc-sp19-cs126/final-project-scho93/blob/master/images/screenshot_3.PNG)
+- Apply the moves with green center facing you and white center on top and the cube will be solved.
+- Press `r` to reset.
+
+### Note
+- Due to factors such as webcam quality, lighting of the environment, and different color shades of different Rubik's Cubes, the color estimation algorithm may not be 100% accurate.
+- For best results, use the program	at a place with good lighting.
+- Changing the angle of the webcam depending on lighting will improve color detection.
+
+### Acknowledgments
+- Kociemba's solving algorithm is taken from https://github.com/muodov/kociemba.

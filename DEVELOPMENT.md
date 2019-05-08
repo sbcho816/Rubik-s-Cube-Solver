@@ -51,10 +51,9 @@
 - Decided to use a widely used, reliable, and optimal solving library from GitHub that uses Kociemba's algorithm, but the catch is that it is written in C.
 - The challenge will be integrating C code with C++.
 - Was able to successfully compile and run the solving program on the command line, but took me a while to figure out due to not having experience with make files.
-- First, I tried to integrate the Kociemba program by using system calls, which is a way to run an executable within a C++ program. Ran into a bunch of issues and challenges. Spent 3 hours trying to debug it until giving up.
-- I decided to try and actually integrate the C source code into my project. Ran into a bunch of errors and challenges again. Needed to use some special syntax for calling C functions in C++ code (extern "C"). Still ran into bunch of problems and after hours of debugging and reading Stack Overflow, I fianlly figured out that it was Visual Studio's fault. It was automatically compiling the C files as C++ files and I had to dig deeply through settings to change the compiler option. 
+- First, I tried to integrate the Kociemba program by using system calls, which is a way to run an executable within a C++ program. Ran into a bunch of issues and errors. Spent 3 hours trying to debug it until giving up.
+- I decided to try and actually integrate the C source code into my project. Ran into a bunch of errors and challenges again. Needed to use some special syntax for calling C functions in C++ code (extern "C"). Still ran into bunch of problems and after hours of debugging and reading Stack Overflow, I finally figured out that it was Visual Studio's fault. It was automatically compiling the C files as C++ files and I had to dig deeply through settings to change the compiler option. 
 - Definitely a painful night, but I'm glad it's working. Next step is outputting the solution based on the scanned cube.
-
 - Was able to input the scramble state from the scanned cube to the solving algorithm. Successfully displays the solution to the screen!
 - Fixed the reset function.
 - Made small tweaks to optimize the program.

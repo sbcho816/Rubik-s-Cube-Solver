@@ -1241,4 +1241,7 @@
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="bin\data\CODE.otf" />
+  </ItemGroup>
 </Project>

@@ -46,14 +46,14 @@ class ofApp : public ofBaseApp{
 
 		bool reset = false;
 
-		// Rubik's Cube RGB values inspired from https://www.schemecolor.com/rubik-cube-colors.php.
 		// Colors to be compared with input color.
+		// Colors may be modified based on shade of the Rubik's Cube.
 		const ofColor compare_white = ofColor(224, 224, 224);
 		const ofColor compare_yellow = ofColor(255, 213, 0);
 		const ofColor compare_red = ofColor(200, 0, 0);
 		const ofColor compare_orange = ofColor(255, 85, 0);
-		const ofColor compare_green = ofColor(0, 155, 50);
-		const ofColor compare_blue = ofColor(0, 69, 173);
+		const ofColor compare_green = ofColor(0, 155, 40);
+		const ofColor compare_blue = ofColor(0, 70, 173);
 
 		// Cube colors displayed on screen.
 		const ofColor display_white = ofColor(255, 255, 255);
