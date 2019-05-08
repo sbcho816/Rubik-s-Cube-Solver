@@ -575,7 +575,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="bin\data\CODE.otf" />
+    <Font Include="bin\data\fonts\CODE.otf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

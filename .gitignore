@@ -41,7 +41,7 @@
 # but not the data folder
 
 /bin/*
-!/bin/data/
+!/bin/data/fonts/
 
 # general
 

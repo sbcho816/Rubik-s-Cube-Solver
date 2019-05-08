@@ -9,7 +9,7 @@ Program that recognizes the colors of the Rubik's Cube through the webcam and ou
 5. The program can now be run using an IDE.
 
 ### Using the Program
-- Position the Rubik's Cube so that each of the 9 green squares lies on each sticker of the cube as shown below.
+- Position the Rubik's Cube so that each of the 9 green reference squares lies on a sticker of the cube as shown below.
 ![screenshot_1](https://github.com/uiuc-sp19-cs126/final-project-scho93/blob/master/images/screenshot_1.PNG)
 - The program will show two real-time images of the cube face on the top left. The left image shows the estimated colors. The right image shows the actual colors detected by the webcam.
 - Press `space` to scan a side of the cube.
@@ -20,7 +20,7 @@ Program that recognizes the colors of the Rubik's Cube through the webcam and ou
 	4. Scan orange center with white center on top.
 	5. Scan yellow center with green center on top.
 	6. Scan white center with blue center on top.
-- After each scan, the scanned side will be displayed in the lower left of the screen. The photo below shows the white center being scanned.
+- After each scan, the scanned side will be displayed on the lower left of the screen. The photo below shows the white center being scanned.
 ![screenshot_2](https://github.com/uiuc-sp19-cs126/final-project-scho93/blob/master/images/screenshot_2.PNG)
 - Press `s` to output the solution to the Rubik's Cube.
 - The solution to the cube will be outputted in [Singmaster notation](https://proofwiki.org/wiki/Definition:Singmaster_Notation) as shown below.
